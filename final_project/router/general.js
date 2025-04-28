@@ -80,5 +80,65 @@ public_users.get("/review/:isbn", function (req, res) {
   }
 });
 
+// Import Axios
+const axios = require('axios');
+
+// URL of your API endpoint (adjust the endpoint based on your server URL)
+const API_URL = 'http://localhost:5000/';
+
+// Function to get the list of books
+async function getBooks() {
+  try {
+    const response = await axios.get(`${API_URL}`); // Assuming `/` is the endpoint for getting books
+    console.log('Books List:', response.data);
+  } catch (error) {
+    console.error('Error fetching books:', error);
+  }
+}
+
+// Call the function to fetch books
+getBooks();
+
+// Function to get book details based on ISBN
+async function getBookDetailsByISBN(isbn) {
+  try {
+    const response = await axios.get(`${API_URL}isbn/${isbn}`);  // API endpoint for fetching book by ISBN
+    console.log('Book Details:', response.data);
+  } catch (error) {
+    console.error('Error fetching book details:', error);
+  }
+}
+
+// Call the function to get details of a specific book by ISBN
+getBookDetailsByISBN('1');  // Replace '1' with the ISBN you want to test
+
+// Function to get book details based on Author
+async function getBooksByAuthor(author) {
+  try {
+    const response = await axios.get(`${API_URL}author/${author}`);  // API endpoint for fetching books by author
+    console.log('Books by Author:', response.data);
+  } catch (error) {
+    console.error('Error fetching books by author:', error);
+  }
+}
+
+// Call the function to get books by author
+getBooksByAuthor('Chinua Achebe');  // Replace with the author's name you want to test
+
+
+
+// Function to get book details based on Title
+async function getBooksByTitle(title) {
+  try {
+    const response = await axios.get(`${API_URL}title/${title}`);  // API endpoint for fetching books by title
+    console.log('Books by Title:', response.data);
+  } catch (error) {
+    console.error('Error fetching books by title:', error);
+  }
+}
+
+// Call the function to get books by title
+getBooksByTitle('Things Fall Apart');  // Replace with the book title you want to test
+
 
 module.exports.general = public_users;
